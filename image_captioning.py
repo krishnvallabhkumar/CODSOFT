@@ -7,8 +7,6 @@ except ImportError:
     print("Missing required libraries. Please run: pip install transformers torch torchvision pillow")
     exit()
 
-# Load pre-trained model, processor, and tokenizer
-# This model uses a Vision Transformer (ViT) as encoder and GPT-2 as decoder
 model_name = "nlpconnect/vit-gpt2-image-captioning"
 model = VisionEncoderDecoderModel.from_pretrained(model_name)
 feature_extractor = ViTImageProcessor.from_pretrained(model_name)
@@ -28,7 +26,6 @@ def predict_step(image_paths):
     pixel_values = feature_extractor(images=images, return_tensors="pt").pixel_values
     pixel_values = pixel_values.to(device)
 
-    # Generation parameters
     gen_kwargs = {"max_length": 16, "num_beams": 4}
     output_ids = model.generate(pixel_values, **gen_kwargs)
 
@@ -40,8 +37,6 @@ def main():
     print("--- Image Captioning AI ---")
     print(f"Using device: {device}")
     
-    # Example usage: Replace with your image path
-    # You can also pass a list of images
     image_path = input("Enter the full path to an image file (e.g., image.jpg): ").strip()
     
     if os.path.exists(image_path):
