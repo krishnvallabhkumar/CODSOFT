@@ -1,6 +1,5 @@
 import math
 
-# Constants for the players
 HUMAN = 'X'
 AI = 'O'
 EMPTY = ' '
@@ -14,7 +13,6 @@ def print_board(board):
     print("\n")
 
 def check_winner(board):
-    # Check rows, columns, and diagonals
     for row in range(3):
         if board[row][0] == board[row][1] == board[row][2] != EMPTY:
             return board[row][0]
@@ -29,7 +27,6 @@ def check_winner(board):
     if board[0][2] == board[1][1] == board[2][0] != EMPTY:
         return board[0][2]
     
-    # Check for draw
     if all(cell != EMPTY for row in board for cell in row):
         return 'Draw'
     
@@ -92,7 +89,6 @@ def main():
     print_board(board)
 
     while True:
-        # Human Move
         while True:
             try:
                 move = input("Enter your move (row and col: 0, 1, or 2) separated by space: ")
@@ -109,7 +105,6 @@ def main():
         if check_winner(board):
             break
 
-        # AI Move
         print("AI is thinking...")
         r, c = get_best_move(board)
         board[r][c] = AI
