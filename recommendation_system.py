@@ -1,6 +1,4 @@
-# Simple Movie Recommendation System (Content-Based)
 
-# Sample Dataset: Movies and their genres
 movies_db = [
     {"title": "The Dark Knight", "genres": ["Action", "Crime", "Drama"]},
     {"title": "Inception", "genres": ["Action", "Adventure", "Sci-Fi"]},
@@ -25,22 +23,19 @@ def calculate_similarity(genres1, genres2):
     return len(intersection) / len(union)
 
 def get_recommendations(user_movie):
-    # Find the movie in our database
     target_movie = next((m for m in movies_db if m["title"].lower() == user_movie.lower()), None)
     
     if not target_movie:
         return None
 
-    # Calculate similarity scores for all other movies
     scores = []
     for movie in movies_db:
         if movie["title"].lower() != user_movie.lower():
             score = calculate_similarity(target_movie["genres"], movie["genres"])
             scores.append((movie["title"], score, movie["genres"]))
     
-    # Sort movies by similarity score in descending order
     scores.sort(key=lambda x: x[1], reverse=True)
-    return scores[:3]  # Return top 3 recommendations
+    return scores[:3]  
 
 def main():
     print("Welcome to the Simple Movie Recommendation System!")
