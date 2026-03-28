@@ -3,7 +3,6 @@ import re
 def chatbot_response(user_input):
     user_input = user_input.lower()
 
-    # Predefined rules and responses using pattern matching
     if re.search(r'\bhello\b|\bhi\b|\bhey\b', user_input):
         return "Hello! I'm your friendly rule-based chatbot. How can I help you today?"
     
